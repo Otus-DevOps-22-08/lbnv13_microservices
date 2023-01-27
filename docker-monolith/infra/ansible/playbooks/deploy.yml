@@ -1,0 +1,13 @@
+---
+- name: deploy Otus container
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: deploy docker container
+      docker_container:
+        image: lbnvd13/otus-reddit:1.0
+        name: otus-reddit
+        state: started
+        ports:
+          - 80:9292
