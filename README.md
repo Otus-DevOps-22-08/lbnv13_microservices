@@ -1,6 +1,20 @@
 # lbnv13_microservices
 lbnv13 microservices repository
 
+## HW-16
+### Monitoring-1
+#### Основное задание
+Переупорядочена структура директорий
+Запущен и сконфигурирован prometheus 
+Настроен мониторинг микросервисов
+Добавлен Node exporter
+Собранные образы загружены на DockerHub
+#### Задание с *
+Добавлен мониторинг MongoDB (percona/mongodb_exporter)
+Добавлен Blackbox exporter (prom/blackbox-exporter)
+В корне репозитория добавлен Makefile (собирает образы, пушит, стартует локально compose 
+по умолчаниюв выводит информацию с командами)
+
 ## HW-15
 ### Docker-4
 #### Основное задание
