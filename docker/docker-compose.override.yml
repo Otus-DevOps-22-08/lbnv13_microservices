@@ -2,14 +2,14 @@ version: '3.3'
 services:
   ui:
     volumes:
-      - ./ui:/app
+      - ../src/ui:/app
     command: [ "puma", "--debug", "-w", "2" ]
 
   post:
     volumes:
-      - ./post-py:/app
+      - ../src/post-py:/app
 
   comment:
     volumes:
-      - ./comment:/app
+      - ../src/comment:/app
     command: [ "puma", "--debug", "-w", "2" ]
