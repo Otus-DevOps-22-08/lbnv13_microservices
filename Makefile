@@ -1,4 +1,5 @@
 USER_NAME ?= lbnvd13
+tag = logging
 
 all: help
 
@@ -15,13 +16,13 @@ list:
 
 build-all: build-ui build-comment build-prometheus build-post
 build-ui:
-	@docker build -f src/ui/Dockerfile -t ${USER_NAME}/ui src/ui
+	@docker build -f src/ui/Dockerfile -t ${USER_NAME}/ui:${tag} src/ui
 build-comment:
-	@docker build -f src/comment/Dockerfile -t ${USER_NAME}/comment src/comment
+	@docker build -f src/comment/Dockerfile -t ${USER_NAME}/comment:${tag} src/comment
 build-prometheus:
 	@docker build -f monitoring/prometheus/Dockerfile -t ${USER_NAME}/prometheus monitoring/prometheus	
 build-post:
-	@docker build -f src/post-py/Dockerfile -t ${USER_NAME}/post src/post-py
+	@docker build -f src/post-py/Dockerfile -t ${USER_NAME}/post:${tag} src/post-py
 
 push-all: push-ui push-comment push-post push-prometheus
 push-ui:
