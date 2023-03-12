@@ -1,0 +1,4 @@
+- import_playbook: docker.yml
+- import_playbook: k8s.yml
+- import_playbook: create_maser.yml
+- import_playbook: join_workers.yml
