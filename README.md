@@ -1,6 +1,20 @@
 # lbnv13_microservices
 lbnv13 microservices repository
 
+## HW-18
+### kubernetes-1
+#### Основное задание
+Установлен и настроен kubernetes
+#### Задание с **
+Реализована установка кластера k8s с помощью terraform и ansible.
+##### terraform:
+cd kubernetes/terraform && terraform apply 
+создает мастер и воркер инстансы. кол-во воркеров задается переменной
+##### ansible:
+cd kubernetes/ansible && ansible-playbook /playbooks/install.yml
+настраивает мастер и воркер ноду,инвентори динамический через yc_compute 
+подключает воркер ноды к мастеру
+
 ## HW-17
 ### logging-1
 #### Основное задание

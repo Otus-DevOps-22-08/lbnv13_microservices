@@ -1,0 +1,21 @@
+---
+- hosts: master
+  gather_facts: no
+  become: true
+  name: Generate token
+  tasks:
+    - name: Shell token command
+      shell: "kubeadm token create --print-join-command"
+      register: jointoken
+
+    - name: Add token to output
+      add_host:
+        name:   "master-node"
+        token:  "{{ jointoken.stdout_lines[0] }}"
+
+- hosts: worker
+  become: true
+  name: join worker to master
+  tasks:
+    - name: connect to master
+      shell: "{{ hostvars['master-node']['token'] }}"
