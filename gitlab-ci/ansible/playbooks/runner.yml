@@ -1,0 +1,28 @@
+---
+- name: deploy runner
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: Run gitlab-runner
+      community.docker.docker_container:
+        name: gitlab-runner
+        hostname: gitlab-runner
+        image: gitlab/gitlab-runner:latest
+        state: started
+        restart_policy: always
+        volumes:
+          - "/srv/gitlab-runner/config:/etc/gitlab-runner"
+          - "/var/run/docker.sock:/var/run/docker.sock"
+
+    # - name: "Register runner"
+    #   gitlab_runner:
+    #     url: "http://{{ ansible_host }}"
+    #     # api_token: "{{ access_token }}"
+    #     registration-token: "{{ registration_token }}"
+    #     description: Docker runner
+    #     state: present
+    #     active: True
+    #     tag_list: ['linux','xenial','ubuntu','docker']
+    #     run_untagged: True
+    #     locked: False

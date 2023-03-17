@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: true
+  name: print defaults
+  tasks:
+  - shell: docker exec -it $(docker ps -q) cat /etc/gitlab/initial_root_password | grep 'Password' | cut -d " " -f2
+    register: pswd
+  - debug: msg={{ pswd.stdout_lines[1]}}
+  - debug: msg={{ ansible_host }}
+
+  - name: Install python-gitlab
+    ansible.builtin.pip:
+      name: "{{ item }}"
+      umask: "0022"
+    with_items:
+      - python-gitlab
+
+  - name: Create a GitLab Project using a username/password via oauth_token
+    community.general.gitlab_project:
+      api_url: http://51.250.4.176/
+      api_username: "root"
+      api_password: "{{ pswd }}"
+      name: "otus"
+      group: "10481470"

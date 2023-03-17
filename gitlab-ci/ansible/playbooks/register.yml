@@ -1,0 +1,17 @@
+---
+- name: deploy runner
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: "Register runner"
+      gitlab_runner:
+        url: "http://{{ ansible_host }}"
+        # api_token: "{{ access_token }}"
+        registration-token: "GR1348941sNNHwgUAzJApjyB2vaeb"
+        description: Docker runner
+        state: present
+        active: True
+        tag_list: ['linux','xenial','ubuntu','docker']
+        run_untagged: True
+        locked: False
