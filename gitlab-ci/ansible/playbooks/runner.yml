@@ -1,9 +1,26 @@
 ---
-- name: deploy runner
-  hosts: all
+- hosts: all
   become: true
-  
+  name: print defaults
   tasks:
+  - shell: docker exec -it $(docker ps -q) cat /etc/gitlab/initial_root_password | grep 'Password' | cut -d " " -f2
+    register: pswd
+  - debug: msg='http://{{ ansible_host }}'
+  - debug: msg='default root pswd {{ pswd.stdout_lines[1]}}'
+
+- hosts: all
+  become: true
+  vars_prompt:
+    - name: token
+      prompt: insert token here
+      private: false
+  tasks:
+    - name: Create directories
+      ansible.builtin.file:
+        name: /srv/gitlab-runnner/config
+        state: directory
+        mode: '0755'
+
     - name: Run gitlab-runner
       community.docker.docker_container:
         name: gitlab-runner
@@ -15,14 +32,7 @@
           - "/srv/gitlab-runner/config:/etc/gitlab-runner"
           - "/var/run/docker.sock:/var/run/docker.sock"
 
-    # - name: "Register runner"
-    #   gitlab_runner:
-    #     url: "http://{{ ansible_host }}"
-    #     # api_token: "{{ access_token }}"
-    #     registration-token: "{{ registration_token }}"
-    #     description: Docker runner
-    #     state: present
-    #     active: True
-    #     tag_list: ['linux','xenial','ubuntu','docker']
-    #     run_untagged: True
-    #     locked: False
+    - name: Register gitlab-runner
+      community.docker.docker_container_exec:
+        container: gitlab-runner
+        command: gitlab-runner register --non-interactive --docker-image "alpine:latest" --name "runner"  --url "http://{{ ansible_host }}" --executor docker --locked=false --registration-token "{{token}}" --run-untagged

@@ -27,12 +27,12 @@
       - /srv/gitlab/data
       - /srv/gitlab/logs
 
-  - name: Copy template file
+  - name: copy template file
     ansible.builtin.template:
       src: gitlab.yml.j2
       dest: /srv/gitlab/docker-compose.yml
       mode: 0755
-
+      
   - name: Docker-compose up
     community.docker.docker_compose:
       project_src: /srv/gitlab/
