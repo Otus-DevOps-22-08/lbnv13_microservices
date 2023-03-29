@@ -4,7 +4,7 @@ metadata:
   name: ui
   labels:
     app: reddit
-    component: post
+    component: ui
 spec:
   type: NodePort
   ports:
