@@ -6,31 +6,20 @@ variable "folder_id" {
 }
 variable "zone" {
   description = "Zone"
-  # Значение по умолчанию
   default = "ru-central1-a"
 }
 variable "public_key_path" {
-  # Описание переменной
   description = "Path to the public key used for ssh access"
 }
+variable "network_id" {
+  description = "network id"
+}
 variable "subnet_id" {
-  description = "Subnet"
+  description = "subnet id"
 }
 variable "service_account_key_file" {
-  description = "key .json"
+  description = "service account key file"
 }
-variable "private_key_path" {
-  description = "Path to the private key used for ssh access"
-}
-variable "count_worker" {
-  description = "Worker nodes count"
-  default     = 1
-}
-variable "disk_image" {
-  description = "Disk image"
-  default     = "ubuntu-18.04"
-}
-variable "disk_size" {
-  description = "size"
-  default     = "40"
+variable "service_account_id" {
+  description = "service account key id"
 }

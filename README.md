@@ -1,6 +1,42 @@
 # lbnv13_microservices
 lbnv13 microservices repository
 
+## HW-20
+### kubernetes-2
+#### Основное задание
+Развернуто локальное окружение для работы с Kubernetes 
+Для minikube использован Virtualbox
+Развернут Kubernetes в Yandex Cloud
+Запущен reddit в Kubernetes
+#### Задание с **
+Кластер поднимается терраформом 
+Дашборд запускается из каталога dashboard.
+kubectl apply -f ./kubernetes/dashboard -n kubernetes-dashboard
+Для того чтобы открыть дашборд:
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep dashboard-admin | awk '{print $1}')
+Получаем токен доступа. 
+Далее запускаем kubectl proxy -n kubernetes-dashboard 
+и получаем дашборд на локалхосте. 
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/namespace?namespace=default
+вводим токен, который получили
+
+
+
+## HW-19
+### gitlab-ci-1
+#### Основное задание
+Подготовлена инсталляция Gitlab CI
+Описаны этапы пайплайна
+Определены окружения
+#### Задание с **
+.Инстанс поднимается терраформом
+2.Гитлаб ставится через ansible-playbook ./playbooks/install_gitlab.yml
+Встарые споcобы получения токена depricated, потому разделено на 2 плейбука.
+После разворота гитлаба надо запустить ansible-playbook ./playbooks/runner.yml.
+Плейбук выведет дефолтный пароль для root (для удобства), и попросит ввести токен.
+Вводим токен полученный в веб интерфейсе и получаем зарегистрированный раннер.
+Для пайплайна (build_job) используется докерхаб образ из предыдущих дз lbnvd13/otus-reddit:1.0
+
 ## HW-18
 ### kubernetes-1
 #### Основное задание
