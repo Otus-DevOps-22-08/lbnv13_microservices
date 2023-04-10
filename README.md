@@ -1,6 +1,17 @@
 # lbnv13_microservices
 lbnv13 microservices repository
 
+## HW-21
+### kubernetes-3
+#### Основное задание
+Проверено использование LoadBalancer
+Использован Ingress
+Применен Network Policy
+Добавлены PersistentVolume и PersistentVolumeClaim. Проверена доступность данных бд после перезапуска.
+#### Задание с **
+Описан создаваемый объект Secret в виде Kubernetes-манифеста.
+Файл ui-ingress-secret.yml. Лишние метаданые закомментированы.
+
 ## HW-20
 ### kubernetes-2
 #### Основное задание
