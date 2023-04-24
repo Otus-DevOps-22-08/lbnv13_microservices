@@ -2,13 +2,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ui
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
   annotations:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: nginx
-  tls:
-  - secretName: ui-ingress
+#  tls:
+#  - secretName: {{ .Release.Name }}-{{ .Chart.Name }}
   rules:
   - http:
       paths:
@@ -16,6 +16,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: ui
+            name: {{ .Release.Name }}-{{ .Chart.Name }}
             port:
               number: 9292
