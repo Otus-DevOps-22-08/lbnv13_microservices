@@ -1,17 +1,15 @@
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: ui
+  name: mongodb
   labels:
     app: reddit
-    component: ui
+    component: mongo
 spec:
-  type: NodePort
   ports:
-  - port: 9292
+  - port: 27017
     protocol: TCP
-    targetPort: 9292
+    targetPort: 27017
   selector:
     app: reddit
-    component: ui
+    component: mongo
